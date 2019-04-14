@@ -7,6 +7,7 @@ namespace Convey
     {
         IServiceCollection Services { get; }
         bool TryRegister(string name);
+        void AddBuildAction(Action<IServiceProvider> execute);
         IServiceProvider Build();
     }
 }

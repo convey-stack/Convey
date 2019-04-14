@@ -8,11 +8,16 @@ namespace Convey
     public sealed class ConveyBuilder : IConveyBuilder
     {
         private readonly List<string> _registry;
+        private readonly List<Action<IServiceProvider>> _buildActions;
         private readonly IServiceCollection _services;
         IServiceCollection IConveyBuilder.Services => _services;
 
         private ConveyBuilder(IServiceCollection services)
-            => (_services, _registry) = (services, new List<string>());
+        {
+            _registry = new List<string>();
+            _buildActions = new List<Action<IServiceProvider>>();
+            _services = services;
+        }
 
         public static IConveyBuilder Create(IServiceCollection services)
             => new ConveyBuilder(services);
@@ -30,7 +35,14 @@ namespace Convey
             return true;
         }
 
+        public void AddBuildAction(Action<IServiceProvider> execute)
+            => _buildActions.Add(execute);
+
         public IServiceProvider Build()
-            => _services.BuildServiceProvider();
+        {
+            var serviceProvider = _services.BuildServiceProvider();
+            _buildActions.ForEach(a => a(serviceProvider));
+            return serviceProvider;
+        }
     }
 }
