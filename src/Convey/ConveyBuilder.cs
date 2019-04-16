@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Convey.Types;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Convey
@@ -9,6 +10,7 @@ namespace Convey
     {
         private readonly List<string> _registry;
         private readonly List<Action<IServiceProvider>> _buildActions;
+        private readonly StartupInitializer _startupInitializer;
         private readonly IServiceCollection _services;
         IServiceCollection IConveyBuilder.Services => _services;
 
@@ -16,6 +18,7 @@ namespace Convey
         {
             _registry = new List<string>();
             _buildActions = new List<Action<IServiceProvider>>();
+            _startupInitializer = new StartupInitializer();
             _services = services;
         }
 
@@ -38,10 +41,21 @@ namespace Convey
         public void AddBuildAction(Action<IServiceProvider> execute)
             => _buildActions.Add(execute);
 
+        public void AddInitializer(IInitializer initializer)
+            => _startupInitializer.AddInitializer(initializer);
+
+        public void AddInitializer<TInitializer>() where TInitializer : IInitializer
+            => AddBuildAction(sp =>
+            {
+                var initializer = sp.GetService<TInitializer>();
+                _startupInitializer.AddInitializer(initializer);
+            });
+
         public IServiceProvider Build()
         {
             var serviceProvider = _services.BuildServiceProvider();
             _buildActions.ForEach(a => a(serviceProvider));
+            _startupInitializer.InitializeAsync();
             return serviceProvider;
         }
     }
