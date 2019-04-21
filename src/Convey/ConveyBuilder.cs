@@ -20,6 +20,7 @@ namespace Convey
             _buildActions = new List<Action<IServiceProvider>>();
             _startupInitializer = new StartupInitializer();
             _services = services;
+            _services.AddTransient<IStartupInitializer, StartupInitializer>(_ => _startupInitializer);
         }
 
         public static IConveyBuilder Create(IServiceCollection services)
@@ -55,7 +56,6 @@ namespace Convey
         {
             var serviceProvider = _services.BuildServiceProvider();
             _buildActions.ForEach(a => a(serviceProvider));
-            _startupInitializer.InitializeAsync();
             return serviceProvider;
         }
     }
