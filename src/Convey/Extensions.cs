@@ -9,6 +9,9 @@ namespace Convey
 {
     public static class Extensions
     {
+        public static IConveyBuilder AddConvey(this IServiceCollection services)
+            => ConveyBuilder.Create(services);
+
         public static TModel GetOptions<TModel>(this IConfiguration configuration, string sectionName)
             where TModel : new()
         {
