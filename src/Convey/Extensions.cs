@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Convey.Types;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +40,17 @@ namespace Convey
             }
 
             return initializer.InitializeAsync();
+        }
+
+        public static IApplicationBuilder UseInitializers(this IApplicationBuilder builder)
+        {
+            using (var scope = builder.ApplicationServices.CreateScope())
+            {
+                var initializers = scope.ServiceProvider.GetServices<IInitializer>();
+                Task.Run(() => Task.WhenAll(initializers.Select(i => i.InitializeAsync())));
+            }
+
+            return builder;
         }
     }
 }
