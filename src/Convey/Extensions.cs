@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Convey.Types;
 using Microsoft.AspNetCore.Builder;
@@ -11,7 +12,7 @@ namespace Convey
     {
         public static IConveyBuilder AddConvey(this IServiceCollection services)
             => ConveyBuilder.Create(services);
-        
+
         public static TModel GetOptions<TModel>(this IConfiguration configuration, string sectionName)
             where TModel : new()
         {
@@ -39,6 +40,17 @@ namespace Convey
             }
 
             return initializer.InitializeAsync();
+        }
+
+        public static IApplicationBuilder UseInitializers(this IApplicationBuilder builder)
+        {
+            using (var scope = builder.ApplicationServices.CreateScope())
+            {
+                var initializer = scope.ServiceProvider.GetService<IStartupInitializer>();
+                Task.Run(() => initializer.InitializeAsync());
+            }
+
+            return builder;
         }
     }
 }
