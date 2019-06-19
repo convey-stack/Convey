@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Convey.Types;
 using Microsoft.AspNetCore.Builder;
@@ -31,22 +30,16 @@ namespace Convey
             }
         }
 
-        public static Task InitAsync(this IApplicationBuilder app)
-        {
-            var initializer = app.ApplicationServices.GetService<IStartupInitializer>();
-            if (initializer is null)
-            {
-                throw new InvalidOperationException("Startup initializer was not found.");
-            }
-
-            return initializer.InitializeAsync();
-        }
-
         public static IApplicationBuilder UseInitializers(this IApplicationBuilder builder)
         {
             using (var scope = builder.ApplicationServices.CreateScope())
             {
                 var initializer = scope.ServiceProvider.GetService<IStartupInitializer>();
+                if (initializer is null)
+                {
+                    throw new InvalidOperationException("Startup initializer was not found.");
+                }
+
                 Task.Run(() => initializer.InitializeAsync());
             }
 

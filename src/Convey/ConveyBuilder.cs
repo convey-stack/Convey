@@ -10,7 +10,6 @@ namespace Convey
     {
         private readonly List<string> _registry;
         private readonly List<Action<IServiceProvider>> _buildActions;
-        private readonly StartupInitializer _startupInitializer;
         private readonly IServiceCollection _services;
         IServiceCollection IConveyBuilder.Services => _services;
 
@@ -18,9 +17,8 @@ namespace Convey
         {
             _registry = new List<string>();
             _buildActions = new List<Action<IServiceProvider>>();
-            _startupInitializer = new StartupInitializer();
             _services = services;
-            _services.AddTransient<IStartupInitializer, StartupInitializer>(_ => _startupInitializer);
+            _services.AddSingleton<IStartupInitializer, StartupInitializer>();
         }
 
         public static IConveyBuilder Create(IServiceCollection services)
@@ -29,12 +27,12 @@ namespace Convey
         public bool TryRegister(string name)
         {
             var isAlreadyRegistered = _registry.Any(r => r == name);
-            
+
             if (isAlreadyRegistered)
             {
                 return false;
             }
-            
+
             _registry.Add(name);
             return true;
         }
@@ -43,13 +41,18 @@ namespace Convey
             => _buildActions.Add(execute);
 
         public void AddInitializer(IInitializer initializer)
-            => _startupInitializer.AddInitializer(initializer);
+            => AddBuildAction(sp =>
+            {
+                var startupInitializer = sp.GetService<IStartupInitializer>();
+                startupInitializer.AddInitializer(initializer);
+            });
 
         public void AddInitializer<TInitializer>() where TInitializer : IInitializer
             => AddBuildAction(sp =>
             {
                 var initializer = sp.GetService<TInitializer>();
-                _startupInitializer.AddInitializer(initializer);
+                var startupInitializer = sp.GetService<IStartupInitializer>();
+                startupInitializer.AddInitializer(initializer);
             });
 
         public IServiceProvider Build()
