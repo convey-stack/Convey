@@ -18,7 +18,7 @@ namespace Convey
             _registry = new List<string>();
             _buildActions = new List<Action<IServiceProvider>>();
             _services = services;
-            _services.AddSingleton<IStartupInitializer, StartupInitializer>();
+            _services.AddSingleton<IStartupInitializer>(new StartupInitializer());
         }
 
         public static IConveyBuilder Create(IServiceCollection services)

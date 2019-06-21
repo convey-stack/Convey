@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convey.Auth", "..\Convey.Auth\src\Convey.Auth\Convey.Auth.csproj", "{74B1E493-DE8F-4387-8E81-AC20D28739D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convey.Configurations.Vault", "..\Convey.Configurations.Vault\src\Convey.Configurations.Vault\Convey.Configurations.Vault.csproj", "{6BC30D9D-0606-4452-8000-17429DFD4362}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convey.CQRS.Commands", "..\Convey.CQRS.Commands\src\Convey.CQRS.Commands\Convey.CQRS.Commands.csproj", "{DFC8112E-AB12-4F0F-9B16-34B1B7811D3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convey.CQRS.Events", "..\Convey.CQRS.Events\src\Convey.CQRS.Events\Convey.CQRS.Events.csproj", "{8C82ADF6-9621-460E-8076-BD26BCBB3AC7}"
@@ -33,8 +31,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convey.Persistence.MongoDB"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convey.Persistence.Redis", "..\Convey.Persistence.Redis\src\Convey.Persistence.Redis\Convey.Persistence.Redis.csproj", "{00400923-9C67-42F9-8D81-22F410A3EC66}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9BEDB49D-CD42-422F-B897-EA430421D26F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convey", "src\Convey\Convey.csproj", "{C78A69BE-8AF5-438B-AC8C-8468E7AFD1BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convey.Tracing.Jaeger.RabbitMQ", "..\Convey.Tracing.Jaeger.RabbitMQ\src\Convey.Tracing.Jaeger.RabbitMQ\Convey.Tracing.Jaeger.RabbitMQ.csproj", "{50025894-F595-4F65-843E-AE2620096A6E}"
@@ -46,6 +42,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convey.WebApi", "..\Convey.WebApi\src\Convey.WebApi\Convey.WebApi.csproj", "{7B283EB4-6F28-43D4-A0C3-25B4FDD36842}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convey.WebApi.Swagger", "..\Convey.WebApi.Swagger\src\Convey.WebApi.Swagger\Convey.WebApi.Swagger.csproj", "{54D40B40-1CD5-4224-A548-AE4E6B0EB33D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "..\TestApp\TestApp.csproj", "{0DE99422-39EF-45AC-9752-62707351AFCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,18 +70,6 @@ Global
 		{74B1E493-DE8F-4387-8E81-AC20D28739D3}.Release|x64.Build.0 = Release|Any CPU
 		{74B1E493-DE8F-4387-8E81-AC20D28739D3}.Release|x86.ActiveCfg = Release|Any CPU
 		{74B1E493-DE8F-4387-8E81-AC20D28739D3}.Release|x86.Build.0 = Release|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Debug|x64.Build.0 = Debug|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Debug|x86.Build.0 = Debug|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Release|x64.ActiveCfg = Release|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Release|x64.Build.0 = Release|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Release|x86.ActiveCfg = Release|Any CPU
-		{6BC30D9D-0606-4452-8000-17429DFD4362}.Release|x86.Build.0 = Release|Any CPU
 		{DFC8112E-AB12-4F0F-9B16-34B1B7811D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DFC8112E-AB12-4F0F-9B16-34B1B7811D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFC8112E-AB12-4F0F-9B16-34B1B7811D3D}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -312,8 +298,19 @@ Global
 		{54D40B40-1CD5-4224-A548-AE4E6B0EB33D}.Release|x64.Build.0 = Release|Any CPU
 		{54D40B40-1CD5-4224-A548-AE4E6B0EB33D}.Release|x86.ActiveCfg = Release|Any CPU
 		{54D40B40-1CD5-4224-A548-AE4E6B0EB33D}.Release|x86.Build.0 = Release|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Debug|x64.Build.0 = Debug|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Debug|x86.Build.0 = Debug|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Release|x64.ActiveCfg = Release|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Release|x64.Build.0 = Release|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Release|x86.ActiveCfg = Release|Any CPU
+		{0DE99422-39EF-45AC-9752-62707351AFCC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C78A69BE-8AF5-438B-AC8C-8468E7AFD1BD} = {9BEDB49D-CD42-422F-B897-EA430421D26F}
 	EndGlobalSection
 EndGlobal
