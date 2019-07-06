@@ -9,8 +9,17 @@ namespace Convey
 {
     public static class Extensions
     {
-        public static IConveyBuilder AddConvey(this IServiceCollection services)
-            => ConveyBuilder.Create(services);
+        public static IConveyBuilder AddConvey(this IServiceCollection services, string appOptionsSectionName = "app")
+        {
+            var builder = ConveyBuilder.Create(services);
+            var options = builder.GetOptions<AppOptions>(appOptionsSectionName);
+            if (options.DisplayBanner && !string.IsNullOrWhiteSpace(options.Name))
+            {
+                Console.WriteLine(Figgle.FiggleFonts.Doom.Render(options.Name));
+            }
+
+            return builder;
+        }
 
         public static TModel GetOptions<TModel>(this IConfiguration configuration, string sectionName)
             where TModel : new()
