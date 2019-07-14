@@ -13,6 +13,7 @@ namespace Convey
         {
             var builder = ConveyBuilder.Create(services);
             var options = builder.GetOptions<AppOptions>(appOptionsSectionName);
+            services.AddSingleton(options);
             if (options.DisplayBanner && !string.IsNullOrWhiteSpace(options.Name))
             {
                 Console.WriteLine(Figgle.FiggleFonts.Doom.Render(options.Name));
