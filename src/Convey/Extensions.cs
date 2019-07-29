@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Convey.Types;
 using Microsoft.AspNetCore.Builder;
@@ -55,5 +56,8 @@ namespace Convey
 
             return builder;
         }
+        
+        public static string Underscore(this string value)
+            => string.Concat(value.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString()));
     }
 }
